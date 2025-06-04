@@ -95,7 +95,7 @@ int player::getDirection() {
 	return direction;
 }
 
-//ensures the player doesn't clip through a badguy upon collision
+//ensures the player doesn't clip through badguys upon collision
 void player::Collideplayer(BadGuy BadGuys[], int cSize)
 {
 

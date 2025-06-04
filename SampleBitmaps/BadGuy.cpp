@@ -1,4 +1,5 @@
 #include "BadGuy.h"
+
 BadGuy::~BadGuy()
 {
 	al_destroy_bitmap(image);

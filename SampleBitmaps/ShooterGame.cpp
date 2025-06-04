@@ -7,8 +7,6 @@
 
 int main(void)
 {
-
-
 	const int WIDTH = 800;
 	const int HEIGHT = 400;
 	const int NUM_weapons = 5;
@@ -20,7 +18,6 @@ int main(void)
 	bool done = false;
 	bool redraw = true;
 	const int FPS = 60;
-
 
 	//Allegro variables
 	ALLEGRO_DISPLAY *display = NULL;

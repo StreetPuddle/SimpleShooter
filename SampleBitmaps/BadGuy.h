@@ -25,5 +25,4 @@ private:
 	int boundy;
 	ALLEGRO_BITMAP *image;
 };
-
 #endif
