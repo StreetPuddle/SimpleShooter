@@ -53,28 +53,28 @@ void weapon::Fireweapon( player &Player, int directing)
 		x = Player.getX() + Player.getBoundX()/2;
 		y = Player.getY() + Player.getBoundY()/2;
 		live = true;
-		direction = directing;
+		direction = directing;//updates direction that the bullet will travel
 	}
 }
 void weapon::Updateweapon(int WIDTH, int HEIGHT)
 {
 	if(live)
 	{
-		switch (direction) {
-		case 0:
+		switch (direction) {//determines which direction the bullet will go
+		case 0://up
 			y -= speed;
 			break;
-		case 1:
+		case 1://down
 			y += speed;
 			break;
-		case 2:
+		case 2://left
 			x -= speed;
 			break;
-		case 3:
+		case 3://right
 			x += speed;
 			break;
 		}
-		if(x > WIDTH || x < 0 || y > HEIGHT || y < 0)
+		if(x > WIDTH || x < 0 || y > HEIGHT || y < 0)//will stop existing outside the confines of the display
 			live = false;
 	}
 }

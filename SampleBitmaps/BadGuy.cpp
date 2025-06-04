@@ -57,14 +57,17 @@ void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy BadGuys[], int total, int
 
 				// buffer in collision check
 				if (x > (otherX - otherBoundX - buffer) && x < (otherX + otherBoundX + buffer) &&
-					y >(otherY - otherBoundY - buffer) && y < (otherY + otherBoundY + buffer) &&
-					x > (pX - pBoundX - buffer) && x < (pX + pBoundX + buffer) &&
-					y > (pY - pBoundY - buffer) && y < (pY + pBoundY + buffer))
+					y >(otherY - otherBoundY - buffer) && y < (otherY + otherBoundY + buffer))
 				{
 					collision = true;
 					break;
 				}
 			}
+		}
+		if (x > (pX - pBoundX - buffer) && x < (pX + pBoundX + buffer) &&//additional test to ensure the badguy doesn't spawn on the player
+			y >(pY - pBoundY - buffer) && y < (pY + pBoundY + buffer))
+		{
+			collision = true;
 		}
 	} while (collision);
 }

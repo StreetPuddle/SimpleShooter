@@ -18,7 +18,11 @@ public:
 	int getBoundY(){return boundy;}
 	int getX(){return x;}
 	int getY(){return y;}
+
+	//returns the direction the player is facing
 	int getDirection();
+
+	//ensures the player doesn't clip through a badguy upon collision
 	void player::Collideplayer(BadGuy BadGuys[], int cSize);
 private:
 	int x;

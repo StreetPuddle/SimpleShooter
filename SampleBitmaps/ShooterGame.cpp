@@ -45,7 +45,6 @@ int main(void)
 	weapon weapons[NUM_weapons];
 	BadGuy BadGuys[NUM_BadGuyS];
 
-
 	event_queue = al_create_event_queue();
 	timer = al_create_timer(1.0 / FPS);
 
@@ -72,14 +71,13 @@ int main(void)
 				myPlayer.MoveLeft();
 			if (keys[RIGHT])
 				myPlayer.MoveRight(WIDTH);
-
-			myPlayer.Collideplayer(BadGuys, NUM_BadGuyS);//collison detectorrr
+			myPlayer.Collideplayer(BadGuys, NUM_BadGuyS);//collison detector for player and badguys
 
 			for (int i = 0; i < NUM_weapons; i++)
-				weapons[i].Updateweapon(WIDTH, HEIGHT);
+				weapons[i].Updateweapon(WIDTH, HEIGHT);//takes into account all 4 edges of the display
 			for (int i = 0; i < NUM_BadGuyS; i++)
-				if (!BadGuys[i].getLive())
-					BadGuys[i].StartBadGuy(WIDTH, HEIGHT, BadGuys, NUM_BadGuyS, myPlayer.getX(), myPlayer.getY(), myPlayer.getBoundX(), myPlayer.getBoundY());
+				if (!BadGuys[i].getLive())//skips over badguys that are live
+					BadGuys[i].StartBadGuy(WIDTH, HEIGHT, BadGuys, NUM_BadGuyS, myPlayer.getX(), myPlayer.getY(), myPlayer.getBoundX(), myPlayer.getBoundY());//updated to spawn on truly empty space
 			for(int i=0;i<NUM_weapons;i++)
 				weapons[i].Collideweapon(BadGuys, NUM_BadGuyS);
 

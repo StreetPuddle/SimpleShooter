@@ -39,16 +39,16 @@ player::player(int HEIGHT)
 void player::DrawPlayer()
 {
 	switch (direction) {
-	case 0 : 
+	case 0 : //up
 		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, 0, 0);
 		break;
-	case 1 :
+	case 1 ://down
 		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, ALLEGRO_PI, 0);
 		break;
-	case 2 :
+	case 2 ://left
 		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, -ALLEGRO_PI / 2, 0);
 		break;
-	case 3:
+	case 3://right
 		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, ALLEGRO_PI / 2, 0);
 		break;
 		}
@@ -95,13 +95,14 @@ int player::getDirection() {
 	return direction;
 }
 
+//ensures the player doesn't clip through a badguy upon collision
 void player::Collideplayer(BadGuy BadGuys[], int cSize)
 {
 
 	for (int j = 0; j < cSize; j++)
 	{
-		if (!BadGuys[j].getLive())
-			continue;
+		//if (!BadGuys[j].getLive())//ensures artifact bounds left by badguys do not obstruct the player, no longer needed
+			//continue;
 
 		int leftX = BadGuys[j].getX();
 		int rightX = BadGuys[j].getX() + (BadGuys[j].getBoundX() + (BadGuys[j].getBoundX() * .25));
@@ -113,7 +114,7 @@ void player::Collideplayer(BadGuy BadGuys[], int cSize)
 			y < downY &&
 			y + boundy > upY)
 		{
-			x = archivedX;
+			x = archivedX;//archived x/y to prevent "sticking" to badguy
 			y = archivedY;
 			break;
 		}
