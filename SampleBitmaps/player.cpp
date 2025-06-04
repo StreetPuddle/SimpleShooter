@@ -25,8 +25,8 @@ player::player(int HEIGHT)
 	al_draw_line(0,32,64,32,al_map_rgb(255, 100, 255),2);
 	al_draw_line(32,0,32,64,al_map_rgb(255, 100, 255),2);
 	al_draw_circle(32,32,16,al_map_rgb(200, 200, 200),5);
-
-
+	
+	al_draw_filled_triangle(32, 0, 16, 14, 48, 14, al_map_rgb(255, 80, 80));//added distinct shape to indicate where the image is facing
 
 	x = 20;
 	y = HEIGHT / 2;
@@ -38,29 +38,51 @@ player::player(int HEIGHT)
 }
 void player::DrawPlayer()
 {
-	al_draw_bitmap(image, x,y, 0);
+	switch (direction) {
+	case 0 : 
+		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, 0, 0);
+		break;
+	case 1 :
+		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, ALLEGRO_PI, 0);
+		break;
+	case 2 :
+		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, -ALLEGRO_PI / 2, 0);
+		break;
+	case 3:
+		al_draw_rotated_bitmap(image, boundx / 2, boundy / 2, x + boundx / 2, y + boundy / 2, ALLEGRO_PI / 2, 0);
+		break;
+		}
 }
 void player::MoveUp()
 {
 	y -= speed;
 	if(y < 0)
 		y = 0;
+	direction = 0;
 }
 void player::MoveDown(int HEIGHT)
 {
 	y += speed;
 	if(y > HEIGHT-boundy)
 		y = HEIGHT-boundy;
+	direction = 1;
 }
 void player::MoveLeft()
 {
 	x -= speed;
 	if(x < 0)
 		x = 0;
+	direction = 2;
 }
 void player::MoveRight(int WIDTH)
 {
 	x += speed;
 	if(x > WIDTH-boundx)
 		x = WIDTH-boundx;
+	direction = 3;
+}
+
+//returns the direction the player is facing
+int player::getDirection() {
+	return direction;
 }

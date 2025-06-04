@@ -17,12 +17,14 @@ public:
 	int getBoundY(){return boundy;}
 	int getX(){return x;}
 	int getY(){return y;}
+	int getDirection();
 private:
 	int x;
 	int y;
 	int speed;
 	int boundx;
 	int boundy;
+	int direction;
 	ALLEGRO_BITMAP *image;
 };
 #endif
