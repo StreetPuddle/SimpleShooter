@@ -10,6 +10,7 @@ weapon::~weapon()
 }
 weapon::weapon()
 {
+	
 	speed = 10;
 	live = false;
 	image = al_create_bitmap(64,64);   
@@ -39,27 +40,41 @@ weapon::weapon()
 }
 void weapon::Drawweapon()
 {
-
 	if(live){
 		al_draw_scaled_rotated_bitmap(image,32,32,x,y,.5,.5,angle,0);
 		angle+=.1;
 	}
 }
-void weapon::Fireweapon( player &Player)
+void weapon::Fireweapon( player &Player, int directing)
 {
+
 	if(!live)
 	{
-		x = Player.getX() + Player.getBoundX();
+		x = Player.getX() + Player.getBoundX()/2;
 		y = Player.getY() + Player.getBoundY()/2;
 		live = true;
+		direction = directing;
 	}
 }
-void weapon::Updateweapon(int WIDTH)
+void weapon::Updateweapon(int WIDTH, int HEIGHT)
 {
 	if(live)
 	{
-		x += speed;
-		if(x > WIDTH)
+		switch (direction) {
+		case 0:
+			y -= speed;
+			break;
+		case 1:
+			y += speed;
+			break;
+		case 2:
+			x -= speed;
+			break;
+		case 3:
+			x += speed;
+			break;
+		}
+		if(x > WIDTH || x < 0 || y > HEIGHT || y < 0)
 			live = false;
 	}
 }
@@ -82,6 +97,5 @@ void weapon::Collideweapon(BadGuy BadGuys[], int cSize)
 			}
 		}
 	}
-
 }
 

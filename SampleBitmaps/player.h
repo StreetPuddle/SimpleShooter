@@ -2,6 +2,7 @@
 #define PLAYERH
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_primitives.h>
+#include "BadGuy.h"
 
 class player
 {
@@ -18,12 +19,15 @@ public:
 	int getX(){return x;}
 	int getY(){return y;}
 	int getDirection();
+	void player::Collideplayer(BadGuy BadGuys[], int cSize);
 private:
 	int x;
 	int y;
 	int speed;
 	int boundx;
 	int boundy;
+	int restoreX;
+	int restoreY;
 	int direction;
 	ALLEGRO_BITMAP *image;
 };

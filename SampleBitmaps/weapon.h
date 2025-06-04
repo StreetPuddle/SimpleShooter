@@ -8,8 +8,8 @@ public:
 	weapon();
 	~weapon();
 	void Drawweapon();
-	void Fireweapon(player &Player);
-	void Updateweapon(int WIDTH);
+	void Fireweapon(player &Player, int direction);
+	void Updateweapon(int WIDTH, int HEIGHT);
 	void Collideweapon(BadGuy BadGuys[], int cSize);
 private:
 	int x;
@@ -19,6 +19,7 @@ private:
 	bool live;
 	int speed;
 	float angle;
+	int direction;
 	ALLEGRO_BITMAP *image;
 };
 #endif

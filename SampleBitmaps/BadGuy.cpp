@@ -28,8 +28,6 @@ BadGuy::BadGuy()
 }
 void BadGuy::DrawBadGuy()
 {
-
-
 	if(live)
 	{
 		al_draw_bitmap(image,x,y,0);
@@ -41,16 +39,15 @@ void BadGuy::StartBadGuy(int WIDTH, int HEIGHT )
 
 	if(!live)
 	{
-		if(rand() % 500 == 0)
+		if (rand() % 500 == 0)
 		{
 			live = true;
-			do{
-				x =  rand() % (WIDTH - boundx); 
-			}while (x <100);
-			do{
-				y =  rand() % (HEIGHT - boundy);
-			}while (y<100);
-
+			do {
+				x = rand() % (WIDTH - boundx);
+			} while (x < 100);
+			do {
+				y = rand() % (HEIGHT - boundy);
+			} while (y < 100);
 		}
 	}
 }
