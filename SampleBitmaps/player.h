@@ -26,8 +26,8 @@ private:
 	int speed;
 	int boundx;
 	int boundy;
-	int restoreX;
-	int restoreY;
+	int archivedX;
+	int archivedY;
 	int direction;
 	ALLEGRO_BITMAP *image;
 };

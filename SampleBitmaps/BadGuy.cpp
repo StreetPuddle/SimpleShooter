@@ -34,21 +34,38 @@ void BadGuy::DrawBadGuy()
 	}
 
 }
-void BadGuy::StartBadGuy(int WIDTH, int HEIGHT )
+void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy BadGuys[], int total, int pX, int pY, int pBoundX, int pBoundY)
 {
+	live = true;
+	bool collision;
+	const int buffer = 20; //buffer distance this relates to how big your bitmap is
 
-	if(!live)
-	{
-		if (rand() % 500 == 0)
+	do {
+		collision = false;
+		x = rand() % (WIDTH - boundx);
+		y = rand() % (HEIGHT - boundy);
+
+		// Check for collision with other bad guys
+		for (int i = 0; i < total; i++)
 		{
-			live = true;
-			do {
-				x = rand() % (WIDTH - boundx);
-			} while (x < 100);
-			do {
-				y = rand() % (HEIGHT - boundy);
-			} while (y < 100);
+			if (BadGuys[i].getLive() && &BadGuys[i] != this)
+			{
+				int otherX = BadGuys[i].getX();
+				int otherY = BadGuys[i].getY();
+				int otherBoundX = BadGuys[i].getBoundX();
+				int otherBoundY = BadGuys[i].getBoundY();
+
+				// buffer in collision check
+				if (x > (otherX - otherBoundX - buffer) && x < (otherX + otherBoundX + buffer) &&
+					y >(otherY - otherBoundY - buffer) && y < (otherY + otherBoundY + buffer) &&
+					x > (pX - pBoundX - buffer) && x < (pX + pBoundX + buffer) &&
+					y > (pY - pBoundY - buffer) && y < (pY + pBoundY + buffer))
+				{
+					collision = true;
+					break;
+				}
+			}
 		}
-	}
+	} while (collision);
 }
 

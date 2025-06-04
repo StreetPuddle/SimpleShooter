@@ -55,8 +55,8 @@ void player::DrawPlayer()
 }
 void player::MoveUp()
 {
-	restoreX = x;
-	restoreY = y;
+	archivedX = x;
+	archivedY = y;
 	y -= speed;
 	if(y < 0)
 		y = 0;
@@ -64,8 +64,8 @@ void player::MoveUp()
 }
 void player::MoveDown(int HEIGHT)
 {
-	restoreX = x;
-	restoreY = y;
+	archivedX = x;
+	archivedY = y;
 	y += speed;
 	if(y > HEIGHT-boundy)
 		y = HEIGHT-boundy;
@@ -73,8 +73,8 @@ void player::MoveDown(int HEIGHT)
 }
 void player::MoveLeft()
 {
-	restoreX = x;
-	restoreY = y;
+	archivedX = x;
+	archivedY = y;
 	x -= speed;
 	if(x < 0)
 		x = 0;
@@ -82,8 +82,8 @@ void player::MoveLeft()
 }
 void player::MoveRight(int WIDTH)
 {
-	restoreX = x;
-	restoreY = y;
+	archivedX = x;
+	archivedY = y;
 	x += speed;
 	if(x > WIDTH-boundx)
 		x = WIDTH-boundx;
@@ -100,6 +100,9 @@ void player::Collideplayer(BadGuy BadGuys[], int cSize)
 
 	for (int j = 0; j < cSize; j++)
 	{
+		if (!BadGuys[j].getLive())
+			continue;
+
 		int leftX = BadGuys[j].getX();
 		int rightX = BadGuys[j].getX() + (BadGuys[j].getBoundX() + (BadGuys[j].getBoundX() * .25));
 		int upY = BadGuys[j].getY();
@@ -110,8 +113,8 @@ void player::Collideplayer(BadGuy BadGuys[], int cSize)
 			y < downY &&
 			y + boundy > upY)
 		{
-			x = restoreX;
-			y = restoreY;
+			x = archivedX;
+			y = archivedY;
 			break;
 		}
 	}

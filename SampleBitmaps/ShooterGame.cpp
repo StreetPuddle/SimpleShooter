@@ -5,10 +5,6 @@
 #include "BadGuy.h"
 #include "weapon.h"
 
-
-
-
-
 int main(void)
 {
 
@@ -65,24 +61,25 @@ int main(void)
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 
-		if(ev.type == ALLEGRO_EVENT_TIMER)
+		if (ev.type == ALLEGRO_EVENT_TIMER)
 		{
 			redraw = true;
 			if (keys[UP])
 				myPlayer.MoveUp();
-			if(keys[DOWN])
+			if (keys[DOWN])
 				myPlayer.MoveDown(HEIGHT);
-			if(keys[LEFT])
+			if (keys[LEFT])
 				myPlayer.MoveLeft();
-			if(keys[RIGHT])
+			if (keys[RIGHT])
 				myPlayer.MoveRight(WIDTH);
 
 			myPlayer.Collideplayer(BadGuys, NUM_BadGuyS);//collison detectorrr
 
 			for (int i = 0; i < NUM_weapons; i++)
 				weapons[i].Updateweapon(WIDTH, HEIGHT);
-			for(int i=0;i<NUM_BadGuyS;i++)
-				BadGuys[i].StartBadGuy(WIDTH,HEIGHT);
+			for (int i = 0; i < NUM_BadGuyS; i++)
+				if (!BadGuys[i].getLive())
+					BadGuys[i].StartBadGuy(WIDTH, HEIGHT, BadGuys, NUM_BadGuyS, myPlayer.getX(), myPlayer.getY(), myPlayer.getBoundX(), myPlayer.getBoundY());
 			for(int i=0;i<NUM_weapons;i++)
 				weapons[i].Collideweapon(BadGuys, NUM_BadGuyS);
 

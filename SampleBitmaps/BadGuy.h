@@ -9,7 +9,7 @@ public:
 	BadGuy();
 	~BadGuy();
 	void DrawBadGuy();
-	void StartBadGuy(int WIDTH, int HEIGHT );
+	void StartBadGuy(int WIDTH, int HEIGHT, BadGuy BadGuys[], int total, int pX, int pY, int pBoundX, int pBoundY);
 	int getBoundX(){return boundx;}
 	int getBoundY(){return boundy;}
 	int getX(){return x;}
@@ -23,7 +23,6 @@ private:
 	int speed;
 	int boundx;
 	int boundy;
-
 	ALLEGRO_BITMAP *image;
 };
 
